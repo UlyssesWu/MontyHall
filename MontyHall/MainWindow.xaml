@@ -1,0 +1,59 @@
+﻿<Window x:Class="MontyHall.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MontyHall"
+        mc:Ignorable="d"
+        Title="Monty Hall" Height="500" Width="720">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Name="DeskPanel" Orientation="Horizontal" Margin="5,5,4.556,5">
+            <!--<Button BorderThickness="5" Width="50" Height="50" Margin="0,0,5,0" BorderBrush="#FFFF8484"></Button>
+            <Button Width="50" Height="50" Margin="0,0,5,0"></Button>
+            <Button Width="50" Height="50" Margin="0,0,5,0"></Button>
+            <Button Width="50" Height="50" Margin="0,0,5,0"></Button>
+            <Button Width="50" Height="50" Margin="0,0,5,0"></Button>
+            <Button Width="50" Height="50" Margin="0,0,5,0"></Button>
+            <Button Width="50" Height="50" Margin="0,0,5,0"></Button>
+            <Button Width="50" Height="50" Margin="0,0,5,0"></Button>
+            <Button Width="50" Height="50" Margin="0,0,5,0"></Button>
+            <Button Width="50" Height="50" Margin="0,0,5,0"></Button>-->
+        </WrapPanel>
+        <TextBlock Name="Dealer" Grid.Row="1" Margin="5,17,4.556,16.778" Text="Welcome to Monty Hall!" VerticalAlignment="Center"></TextBlock>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Name="BtnStart" Content="Start Game" VerticalAlignment="Center" Margin="5" Click="Start"></Button>
+            <Button Name="BtnChangeDoor" Content="Change Door" Click="ChangeDoor" IsEnabled="False" VerticalAlignment="Center" Margin="5"></Button>
+            <Button Name="BtnResult" Content="Show Result" Click="End" IsEnabled="False" VerticalAlignment="Center" Margin="5"></Button>
+            <Slider Name="SliderCard" Margin="5" Width="120" VerticalAlignment="Center" SmallChange="1" Minimum="3" Maximum="11" Value="{Binding DoorCount}" TickPlacement="TopLeft" IsEnabled="True"/>
+
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <Button Name="PlayChange" Content="10 Games(Change)" Click="AutoPlay" IsEnabled="True" VerticalAlignment="Center" Margin="5"></Button>
+            <Button Name="PlayUnchange" Content="10 Games(No Change)" Click="AutoPlay" IsEnabled="True" VerticalAlignment="Center" Margin="5"></Button>
+            <Button Name="BtnClear" Content="Clear" Click="Clear" IsEnabled="True" VerticalAlignment="Center" Margin="5"></Button>
+            <ToggleButton Name="BtnShowGift" IsThreeState="False" IsChecked="False" Content="Cheat" VerticalAlignment="Center" Margin="5"></ToggleButton>
+            <TextBlock Name="TextCheat" Text="赌博默示录" Margin="5,0,5,0" VerticalAlignment="Center"/>
+        </StackPanel>
+        <DataGrid Name="DataMatch" Grid.Row="4" AutoGenerateColumns="False" IsReadOnly="True" VerticalScrollBarVisibility="Visible">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Round}" ClipboardContentBinding="{x:Null}" Header="Round"/>
+                <DataGridTextColumn Binding="{Binding Doors}" ClipboardContentBinding="{x:Null}" Header="Doors"/>
+                <DataGridTextColumn Binding="{Binding Changed}" ClipboardContentBinding="{x:Null}" Header="Changed"/>
+                <DataGridTextColumn Binding="{Binding Result}" ClipboardContentBinding="{x:Null}" Header="Result"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StatusBar Grid.Row="5">
+            <Label x:Name="LblWin" Content="{Binding WinRate}" Margin="0,0,5,5" />
+            <Label x:Name="LblChangeWin" Content="{Binding ChangeWinRate}" Margin="0,0,5,5" />
+            <Label x:Name="LblUnchangeWin" Content="{Binding UnchangeWinRate}" Margin="0,0,5,5" />
+        </StatusBar>
+    </Grid>
+</Window>
